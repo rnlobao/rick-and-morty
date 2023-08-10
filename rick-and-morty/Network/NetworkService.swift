@@ -45,7 +45,7 @@ public class NetworkService {
             return
         }
         
-        AF.request(url).response { response in
+        AF.request(urlString).response { response in
             switch response.result {
             case .success(let data):
                 do {

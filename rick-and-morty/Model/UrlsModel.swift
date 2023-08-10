@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - Welcome
 struct AllUrls: Codable {
     let characters, locations, episodes: String
 }

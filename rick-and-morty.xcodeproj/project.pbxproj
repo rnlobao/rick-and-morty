@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2B87A886997891E8C3424067 /* Pods_rick_and_morty_rick_and_mortyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDD8FDF0A09BA7AB39509E1 /* Pods_rick_and_morty_rick_and_mortyUITests.framework */; };
 		4833582CD7998083BB45FE5D /* Pods_rick_and_mortyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67DE1C8CB266894B408673F6 /* Pods_rick_and_mortyTests.framework */; };
+		4A1A6DFA2A85534600417D63 /* UIColor+CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1A6DF92A85534600417D63 /* UIColor+CustomColors.swift */; };
+		4A1A6DFC2A85574A00417D63 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1A6DFB2A85574A00417D63 /* DetailViewController.swift */; };
 		4A4866422A83F39300E999AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4866412A83F39300E999AA /* AppDelegate.swift */; };
 		4A4866442A83F39300E999AA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4866432A83F39300E999AA /* SceneDelegate.swift */; };
 		4A4866462A83F39300E999AA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4866452A83F39300E999AA /* MainViewController.swift */; };
@@ -47,6 +49,8 @@
 /* Begin PBXFileReference section */
 		0074DDC829DE18DDE0C03E4B /* Pods_rick_and_morty.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_rick_and_morty.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		33DC890BB18A4FC0835ED107 /* Pods-rick-and-morty.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rick-and-morty.release.xcconfig"; path = "Target Support Files/Pods-rick-and-morty/Pods-rick-and-morty.release.xcconfig"; sourceTree = "<group>"; };
+		4A1A6DF92A85534600417D63 /* UIColor+CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColors.swift"; sourceTree = "<group>"; };
+		4A1A6DFB2A85574A00417D63 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		4A48663E2A83F39300E999AA /* rick-and-morty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "rick-and-morty.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A4866412A83F39300E999AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A4866432A83F39300E999AA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -170,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				4A4866892A844A1600E999AA /* SpinnerExtension.swift */,
+				4A1A6DF92A85534600417D63 /* UIColor+CustomColors.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -178,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				4A4866452A83F39300E999AA /* MainViewController.swift */,
+				4A1A6DFB2A85574A00417D63 /* DetailViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -490,6 +496,8 @@
 				4A4866842A841C5000E999AA /* CharactersModel.swift in Sources */,
 				4A48667D2A841A8100E999AA /* NetworkConstants.swift in Sources */,
 				4A4866822A841C1800E999AA /* UrlsModel.swift in Sources */,
+				4A1A6DFC2A85574A00417D63 /* DetailViewController.swift in Sources */,
+				4A1A6DFA2A85534600417D63 /* UIColor+CustomColors.swift in Sources */,
 				4A48667A2A84192800E999AA /* MainViewModel.swift in Sources */,
 				4A4866772A83FFA900E999AA /* RickAndMortyTableViewCell.swift in Sources */,
 				4A4866462A83F39300E999AA /* MainViewController.swift in Sources */,

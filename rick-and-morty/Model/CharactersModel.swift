@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: - Welcome
+// MARK: - All Info
 struct Characters: Codable {
     let info: CharactersInfo
     let results: [CharactersResult]

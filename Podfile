@@ -8,6 +8,7 @@ target 'rick-and-morty' do
   # Pods for rick-and-morty
   pod 'Alamofire'
   pod 'SnapKit'
+  pod 'Nuke'
 
   target 'rick-and-mortyTests' do
     inherit! :search_paths

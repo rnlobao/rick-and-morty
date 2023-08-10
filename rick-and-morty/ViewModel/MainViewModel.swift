@@ -31,6 +31,7 @@ class MainViewModel {
     }
     
     public func getData() {
+        delegate?.showLoad()
         NetworkService.getCharacterData { result in
             switch result {
             case .success(let data):
@@ -42,4 +43,6 @@ class MainViewModel {
             self.delegate?.removeLoad()
         }
     }
+    
+    
 }

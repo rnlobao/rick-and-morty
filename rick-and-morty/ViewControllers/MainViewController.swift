@@ -50,6 +50,12 @@ class MainViewController: UIViewController {
             $0.edges.equalToSuperview()
         }
     }
+    
+    // MARK: - Private Properties
+    
+    private func showDetailScreen(viewModel: CharactersResult) {
+        navigationController?.pushViewController(DetailViewController(viewModel: viewModel), animated: true)
+    }
 }
 
 // MARK: - TableView Protocols
@@ -61,7 +67,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RickAndMortyTableViewCell.identifier, for: indexPath) as? RickAndMortyTableViewCell else { return UITableViewCell() }
         let currentCharacter = viewModel.characters[indexPath.row]
-        cell.configure(title: currentCharacter.name, description: currentCharacter.type, image: currentCharacter.image)
+        cell.configure(title: currentCharacter.name, description: currentCharacter.status.rawValue, image: currentCharacter.image)
+        cell.selectionStyle = .none
         return cell
     }
     
@@ -71,10 +78,15 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let currentCharacter = viewModel.characters[indexPath.row]
+        showDetailScreen(viewModel: currentCharacter)
     }
     
 }
 
+
+// MARK: - Screen State Delegate
 extension MainViewController: RickAndMortyDelegate {
     func getDataSucess() {
         mainTableView.reloadData()
@@ -93,7 +105,5 @@ extension MainViewController: RickAndMortyDelegate {
     func removeLoad() {
         removeSpinner()
     }
-    
-    
 }
 
