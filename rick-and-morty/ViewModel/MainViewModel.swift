@@ -14,11 +14,18 @@ protocol RickAndMortyDelegate {
     func removeLoad()
 }
 
-class MainViewModel {
+final class MainViewModel {
     
     // MARK: - Properties
     var characters: [CharactersResult] = []
     var delegate: RickAndMortyDelegate?
+    private var apiInfo: CharactersInfo? = nil
+    
+    public var shouldShowLoadBottom: Bool {
+        return apiInfo?.next != nil
+    }
+    
+    // MARK: - Initializers
     
     init(delegate: RickAndMortyDelegate? = nil) {
         self.delegate = delegate
@@ -30,19 +37,18 @@ class MainViewModel {
         return characters.count
     }
     
-    public func getData() {
+    public func getData(pagination: Bool = false) {
         delegate?.showLoad()
-        NetworkService.getCharacterData { result in
+        NetworkService.getCharacterData(pagination: pagination) { result in
             switch result {
             case .success(let data):
-                self.characters = data.results
+                self.characters.append(contentsOf: data.results)
                 self.delegate?.getDataSucess()
+                self.apiInfo = data.info
             case .failure(let error):
                 self.delegate?.getDataFail(error: error)
             }
             self.delegate?.removeLoad()
         }
     }
-    
-    
 }

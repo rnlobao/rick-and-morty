@@ -57,7 +57,7 @@ class RickAndMortyTableViewCell: UITableViewCell {
         return view
     }()
     
-    // MARK: - Lifecycle
+    // MARK: - Initializers
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setupUI()

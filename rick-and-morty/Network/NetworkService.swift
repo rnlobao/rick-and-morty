@@ -14,7 +14,7 @@ enum NetworkError: Error {
 }
 
 public class NetworkService {
-    static func getCharacterData(completionHandler: @escaping (_ result: Result<Characters, NetworkError>) -> Void) {
+    static func getCharacterData(pagination: Bool = false, completionHandler: @escaping (_ result: Result<Characters, NetworkError>) -> Void) {
         guard let urlString = URL(string: NetworkConstants.shared.geralUrl) else {
             completionHandler(.failure(.urlError))
             return

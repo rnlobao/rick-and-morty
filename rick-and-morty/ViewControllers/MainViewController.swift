@@ -21,6 +21,7 @@ class MainViewController: UIViewController {
         tableView.allowsSelection = true
         
         tableView.register(RickAndMortyTableViewCell.self, forCellReuseIdentifier: RickAndMortyTableViewCell.identifier)
+        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -33,7 +34,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = MainViewModel(delegate: self)
-        self.title = "Rick And Morty"
+        self.title = "Characters"
         setupUI()
         setupConstraints()
         viewModel.getData()
@@ -56,6 +57,15 @@ class MainViewController: UIViewController {
     private func showDetailScreen(viewModel: CharactersResult) {
         navigationController?.pushViewController(DetailViewController(viewModel: viewModel), animated: true)
     }
+    
+    private func createSpinnerFooter() -> UIView {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))
+        let spinner = UIActivityIndicatorView()
+        spinner.center = footerView.center
+        footerView.addSubview(spinner)
+        spinner.startAnimating()
+        return footerView
+    }
 }
 
 // MARK: - TableView Protocols
@@ -65,6 +75,12 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        if viewModel.shouldShowLoadBottom {
+//            guard let cell = tableView.dequeueReusableCell(withIdentifier: FooterLoadingTableViewCell.identifier, for: indexPath) as? FooterLoadingTableViewCell else { return UITableViewCell() }
+//            cell.selectionStyle = .none
+//            return cell
+//        }
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RickAndMortyTableViewCell.identifier, for: indexPath) as? RickAndMortyTableViewCell else { return UITableViewCell() }
         let currentCharacter = viewModel.characters[indexPath.row]
         cell.configure(title: currentCharacter.name, description: currentCharacter.status.rawValue, image: currentCharacter.image)
@@ -83,6 +99,17 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         showDetailScreen(viewModel: currentCharacter)
     }
     
+}
+
+extension MainViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let position = scrollView.contentOffset.y
+        if position > (mainTableView.contentSize.height-100-scrollView.frame.size.height) {
+            self.mainTableView.tableFooterView = createSpinnerFooter()
+            
+            
+        }
+    }
 }
 
 
