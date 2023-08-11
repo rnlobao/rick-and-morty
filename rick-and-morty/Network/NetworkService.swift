@@ -14,12 +14,9 @@ enum NetworkError: Error {
 }
 
 public class NetworkService {
-    static func getCharacterData(pagination: Bool = false, completionHandler: @escaping (_ result: Result<Characters, NetworkError>) -> Void) {
-        guard let urlString = URL(string: NetworkConstants.shared.geralUrl) else {
-            completionHandler(.failure(.urlError))
-            return
-        }
-        
+    static func getCharacterData(completionHandler: @escaping (_ result: Result<Characters, NetworkError>) -> Void) {
+        guard let urlString = URL(string: NetworkConstants.shared.geralUrl) else { return }
+
         AF.request(urlString).response { response in
             switch response.result {
             case .success(let data):
@@ -39,7 +36,7 @@ public class NetworkService {
         }
     }
     
-    static private func getDataFromURLGiven(url: String, completionHandler: @escaping (_ result: Result<Characters, NetworkError>) -> Void) {
+    static func getDataFromURLGiven(url: String, completionHandler: @escaping (_ result: Result<Characters, NetworkError>) -> Void) {
         guard let urlString = URL(string: url) else {
             completionHandler(.failure(.urlError))
             return

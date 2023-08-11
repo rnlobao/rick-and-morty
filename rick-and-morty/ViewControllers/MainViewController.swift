@@ -69,18 +69,13 @@ class MainViewController: UIViewController {
 }
 
 // MARK: - TableView Protocols
+
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRowsInSection()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        if viewModel.shouldShowLoadBottom {
-//            guard let cell = tableView.dequeueReusableCell(withIdentifier: FooterLoadingTableViewCell.identifier, for: indexPath) as? FooterLoadingTableViewCell else { return UITableViewCell() }
-//            cell.selectionStyle = .none
-//            return cell
-//        }
-        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RickAndMortyTableViewCell.identifier, for: indexPath) as? RickAndMortyTableViewCell else { return UITableViewCell() }
         let currentCharacter = viewModel.characters[indexPath.row]
         cell.configure(title: currentCharacter.name, description: currentCharacter.status.rawValue, image: currentCharacter.image)
@@ -105,9 +100,12 @@ extension MainViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let position = scrollView.contentOffset.y
         if position > (mainTableView.contentSize.height-100-scrollView.frame.size.height) {
-            self.mainTableView.tableFooterView = createSpinnerFooter()
-            
-            
+            guard viewModel.shouldLoadMoreInfo, !viewModel.isLoadingMoreCharacters else { return }
+            let spinner = createSpinnerFooter()
+            self.mainTableView.tableFooterView = spinner
+            viewModel.getAdditionalData(urlString: viewModel.apiInfo?.next ?? "")
+        } else {
+            mainTableView.tableFooterView = UIView(frame: CGRect.zero)
         }
     }
 }

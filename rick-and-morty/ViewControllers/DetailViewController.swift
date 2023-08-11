@@ -120,7 +120,7 @@ final class DetailViewController: UIViewController {
     
     public func configure() {
         statusLabel.text = "Status: \(viewModel.status.rawValue)"
-        speciesLabel.text = "Species: \(viewModel.species.rawValue)"
+        speciesLabel.text = "Species: \(viewModel.species)"
         typeLabel.text = "Type: \(viewModel.type)"
         genderLabel.text = "Gender: \(viewModel.gender.rawValue)"
         originLabel.text = "Origin: \(viewModel.origin.name)"

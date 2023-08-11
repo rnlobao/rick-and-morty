@@ -17,14 +17,16 @@ protocol RickAndMortyDelegate {
 final class MainViewModel {
     
     // MARK: - Properties
+    
     var characters: [CharactersResult] = []
     var delegate: RickAndMortyDelegate?
-    private var apiInfo: CharactersInfo? = nil
+    var apiInfo: CharactersInfo? = nil
     
-    public var shouldShowLoadBottom: Bool {
+    public var shouldLoadMoreInfo: Bool {
         return apiInfo?.next != nil
     }
-    
+    public var isLoadingMoreCharacters = false
+     
     // MARK: - Initializers
     
     init(delegate: RickAndMortyDelegate? = nil) {
@@ -37,9 +39,10 @@ final class MainViewModel {
         return characters.count
     }
     
-    public func getData(pagination: Bool = false) {
+    public func getData() {
         delegate?.showLoad()
-        NetworkService.getCharacterData(pagination: pagination) { result in
+        NetworkService.getCharacterData() { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let data):
                 self.characters.append(contentsOf: data.results)
@@ -49,6 +52,22 @@ final class MainViewModel {
                 self.delegate?.getDataFail(error: error)
             }
             self.delegate?.removeLoad()
+        }
+    }
+    
+    public func getAdditionalData(urlString: String) {
+        isLoadingMoreCharacters = true
+        NetworkService.getDataFromURLGiven(url: urlString) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let data):
+                self.characters.append(contentsOf: data.results)
+                self.delegate?.getDataSucess()
+                self.apiInfo = data.info
+                isLoadingMoreCharacters = false
+            case .failure(let error):
+                self.delegate?.getDataFail(error: error)
+            }
         }
     }
 }
