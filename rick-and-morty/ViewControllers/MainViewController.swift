@@ -33,7 +33,7 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = MainViewModel(delegate: self)
+        viewModel = MainViewModel(delegate: self, service: NetworkService())
         self.title = "Characters"
         setupUI()
         setupConstraints()

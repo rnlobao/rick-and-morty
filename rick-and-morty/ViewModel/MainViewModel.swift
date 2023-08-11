@@ -21,6 +21,7 @@ final class MainViewModel {
     var characters: [CharactersResult] = []
     var delegate: RickAndMortyDelegate?
     var apiInfo: CharactersInfo? = nil
+    private let service: NetworkServicing
     
     public var shouldLoadMoreInfo: Bool {
         return apiInfo?.next != nil
@@ -29,8 +30,9 @@ final class MainViewModel {
      
     // MARK: - Initializers
     
-    init(delegate: RickAndMortyDelegate? = nil) {
+    init(delegate: RickAndMortyDelegate? = nil, service: NetworkServicing) {
         self.delegate = delegate
+        self.service = service
     }
     
     // MARK: - Public methods
@@ -41,7 +43,7 @@ final class MainViewModel {
     
     public func getData() {
         delegate?.showLoad()
-        NetworkService.getCharacterData() { [weak self] result in
+        service.getCharacterData() { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let data):
@@ -57,7 +59,7 @@ final class MainViewModel {
     
     public func getAdditionalData(urlString: String) {
         isLoadingMoreCharacters = true
-        NetworkService.getDataFromURLGiven(url: urlString) { [weak self] result in
+        service.getDataFromURLGiven(url: urlString) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let data):

@@ -9,28 +9,34 @@ import XCTest
 @testable import rick_and_morty
 
 final class rick_and_mortyTests: XCTestCase {
+    
+    var viewModel: MainViewModel!
+    let mockedService = NetworkServiceMock()
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    override func setUp() {
+        super.setUp()
+        viewModel = MainViewModel(service: mockedService)
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    override func tearDown() {
+        viewModel = nil
+        super.tearDown()
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    func testNumberOfRowsInSection() {
+        let char = CharactersResult(id: 1, name: "", status: .alive, species: "", type: "", gender: .female, origin: Location(name: "", url: ""), location: Location(name: "", url: ""), image: "", episode: [""], url: "", created: "")
+        viewModel.characters = [char]
+        XCTAssertEqual(viewModel.numberOfRowsInSection(), 1)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testGetDataSuccess() {
+        viewModel.getData()
+        XCTAssertEqual(viewModel.characters.count, 4)
+    }
+    
+    func testGetAdditionalData() {
+        viewModel.getAdditionalData(urlString: "")
+        XCTAssertEqual(viewModel.characters.count, 4)
     }
 
 }
