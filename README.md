@@ -103,7 +103,28 @@ init(delegate: RickAndMortyDelegate? = nil, service: NetworkServicing) {
 }
 ```
 
-## 3. Testes unitários
+## 3. Prevenção de Retain Cycle
+Na chamada da viewModel foi usado o [weak self] pois como abre uma closure é possível fazer referência forte a uma class e ocorrer vazamento de memória.
+
+```Swift
+public func getData() {
+  delegate?.showLoad()
+  service.getCharacterData() { [weak self] result in
+    guard let self = self else { return }
+    switch result {
+    case .success(let data):
+        self.characters.append(contentsOf: data.results)
+        self.delegate?.getDataSucess()
+        self.apiInfo = data.info
+    case .failure(let error):
+        self.delegate?.getDataFail(error: error)
+    }
+    self.delegate?.removeLoad()
+  }
+}
+```
+
+## 4. Testes unitários
 Foi criado um mock conformando com o protocolo da chamada de serviço para facilitar os testes
 
 ```Swift
@@ -121,7 +142,7 @@ func testGetDataSuccess() {
 }
 ```
 
-## 4. Telas
+## 5. Telas
 
 Splash | Tela de detalhes | Paginação
   :---------: | :---------: | :---------:
