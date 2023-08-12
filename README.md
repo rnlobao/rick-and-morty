@@ -122,7 +122,10 @@ func testGetDataSuccess() {
 ```
 
 ## 4. Telas
-![Simulator Screen Recording - iPhone 14 Pro - 2023-08-12 at 14 02 53](https://github.com/rnlobao/rick-and-morty/assets/66230142/ad0746ae-0b6a-4a84-ba12-934d8582ba26)
-![Simulator Screen Recording - iPhone 14 Pro - 2023-08-12 at 14 04 07](https://github.com/rnlobao/rick-and-morty/assets/66230142/4233eee4-ed30-4901-aea3-6fe36e47d985)
+
+Splash | Tela de detalhes | Paginação
+  :---------: | :---------: | :---------:
+  <img width="200" alt="image" src="https://github.com/rnlobao/rick-and-morty/assets/66230142/7be2f04e-5524-40aa-9fec-792b24397cad"> | <img width="200" alt="image" src="https://github.com/rnlobao/rick-and-morty/assets/66230142/ad0746ae-0b6a-4a84-ba12-934d8582ba26"> | <img width="200" alt="image" src="https://github.com/rnlobao/rick-and-morty/assets/66230142/4233eee4-ed30-4901-aea3-6fe36e47d985"> 
+
 
 
