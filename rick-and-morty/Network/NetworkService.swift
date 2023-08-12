@@ -84,6 +84,4 @@ public class NetworkServiceMock: NetworkServicing {
     func getDataFromURLGiven(url: String, completionHandler: @escaping (Result<Characters, NetworkError>) -> Void) {
         completionHandler(.success(generate4Characters()))
     }
-    
-    
 }

@@ -34,9 +34,8 @@ final class rick_and_mortyTests: XCTestCase {
         XCTAssertEqual(viewModel.characters.count, 4)
     }
     
-    func testGetAdditionalData() {
+    func testGetAdditionalDataSuccess() {
         viewModel.getAdditionalData(urlString: "")
         XCTAssertEqual(viewModel.characters.count, 4)
     }
-
 }

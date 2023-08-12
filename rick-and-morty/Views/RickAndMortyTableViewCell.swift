@@ -94,7 +94,6 @@ class RickAndMortyTableViewCell: UITableViewCell {
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.top.equalToSuperview().inset(10)
             $0.bottom.equalToSuperview().inset(10)
-
         }
         
         verticalStackView.snp.makeConstraints {
