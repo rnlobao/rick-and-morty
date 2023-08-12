@@ -14,6 +14,7 @@ Além disso também foi feito:
 - Paginação das requisições
 - Arquitetura MVVM
 - Criação totalmente em ViewCode
+- Injeção de dependências
 
 Essa é API pública do desafio: https://rickandmortyapi.com/api/
 
